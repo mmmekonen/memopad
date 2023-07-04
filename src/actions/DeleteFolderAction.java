@@ -16,30 +16,26 @@ public class DeleteFolderAction extends AbstractAction {
     private ToolBar toolbar;
 
     /** TODO: write spec */
-    private File mainDir;
-
-    /** TODO: write spec */
-    public DeleteFolderAction(ToolBar tb, File folder) {
+    public DeleteFolderAction(ToolBar tb) {
         super("Delete folder");
         putValue(SHORT_DESCRIPTION, "Delete folder");
-        toolbar= tb;
-        mainDir= folder;
+        toolbar = tb;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String fname= (String) JOptionPane.showInputDialog(null, "Select folder to delete:",
-            "Delete Folder", JOptionPane.PLAIN_MESSAGE, null, GUI.folderNames(), null);
+        String fname = (String) JOptionPane.showInputDialog(null, "Select folder to delete:",
+                "Delete Folder", JOptionPane.PLAIN_MESSAGE, null, GUI.folderNames(), null);
         if (fname != null && fname != "") {
-            Object[] options= new Object[] { "Yes", "No" };
-            int n= JOptionPane.showOptionDialog(null,
-                "Are you sure you want to delete folder \"" + fname +
-                    "\" and all of its files?",
-                "Warning", JOptionPane.YES_NO_OPTION,
-                JOptionPane.WARNING_MESSAGE, null, options, options[1]);
+            Object[] options = new Object[] { "Yes", "No" };
+            int n = JOptionPane.showOptionDialog(null,
+                    "Are you sure you want to delete folder \"" + fname +
+                            "\" and all of its files?",
+                    "Warning", JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE, null, options, options[1]);
             if (n == 0) {
-                File folder= new File(System.getProperty("user.home") + "\\memopad\\" + fname);
-                File[] files= folder.listFiles();
+                File folder = new File(System.getProperty("user.home") + "\\memopad\\" + fname);
+                File[] files = folder.listFiles();
                 for (File f : files) {
                     f.delete();
                 }
